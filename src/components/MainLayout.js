@@ -1,13 +1,16 @@
 import useSwR from "swr";
-import SortList from "./SortList";
+import SortList from "./SortList/SortList";
 import BoardTasks from "./BoardTasks";
-import MainFilter from "./MainFilter";
+import MainFilter from "./MainFilter/MainFilter";
 import LoadMore from "./LoadMore";
 import MainControl from "./MainControl";
 import SvgSprite from "./SvgSprite";
+import { useState } from "react";
+import { filterCallbacks } from "../utils";
 
 function MainLayout() {
   const { data, error } = useSwR("/tasks");
+  const [filterType, setFilterType] = useState("all");
 
   if (error) {
     return <div>ошибка доступа или сети</div>;
@@ -17,6 +20,8 @@ function MainLayout() {
     return <div>загрузка...</div>;
   }
 
+  const tasks = data.filter(filterCallbacks[filterType]);
+
   return (
     <>
       <SvgSprite />
@@ -24,12 +29,12 @@ function MainLayout() {
       <main class="main">
         <MainControl />
 
-        <MainFilter />
+        <MainFilter setFilterType={setFilterType} />
 
         <section class="board container">
           <SortList />
 
-          <BoardTasks tasks={data} />
+          <BoardTasks tasks={tasks} />
 
           <LoadMore />
         </section>
