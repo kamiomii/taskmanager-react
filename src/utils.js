@@ -18,8 +18,8 @@ const filters = [
     id: crypto.randomUUID,
     filterType: "all",
     disabled: false,
-    checked: true,
-    count: 13,
+    checked: false,
+    count: 0,
   },
   {
     id: crypto.randomUUID,
@@ -40,21 +40,21 @@ const filters = [
     filterType: "favorites",
     disabled: false,
     checked: false,
-    count: 1,
+    count: 0,
   },
   {
     id: crypto.randomUUID,
     filterType: "repeating",
     disabled: false,
     checked: false,
-    count: 1,
+    count: 0,
   },
   {
     id: crypto.randomUUID,
     filterType: "archive",
     disabled: false,
     checked: false,
-    count: 115,
+    count: 0,
   },
 ];
 

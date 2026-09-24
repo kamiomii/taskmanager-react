@@ -20,7 +20,7 @@ function MainLayout() {
     return <div>загрузка...</div>;
   }
 
-  const tasks = data.filter(filterCallbacks[filterType]);
+  const tasks = [...data].filter(filterCallbacks[filterType]);
 
   return (
     <>
@@ -29,7 +29,11 @@ function MainLayout() {
       <main class="main">
         <MainControl />
 
-        <MainFilter setFilterType={setFilterType} />
+        <MainFilter
+          data={data}
+          filterType={filterType}
+          setFilterType={setFilterType}
+        />
 
         <section class="board container">
           <SortList />
