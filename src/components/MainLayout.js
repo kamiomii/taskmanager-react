@@ -1,6 +1,6 @@
 import useSwR from "swr";
 import SortList from "./SortList/SortList";
-import BoardTasks from "./BoardTasks";
+import BoardTasks from "./BoardTasks/BoardTasks";
 import MainFilter from "./MainFilter/MainFilter";
 import LoadMore from "./LoadMore";
 import MainControl from "./MainControl";
