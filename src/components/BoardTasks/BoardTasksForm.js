@@ -1,25 +1,22 @@
+import BoardTasksColor from "./BoardTasksColor";
 import BoardTasksRepeatDay from "./BoardTasksRepeatDay";
 
-const BoardTasksForm = () => {
-  const repeatDays = {
-    mo: false,
-    tu: false,
-    we: false,
-    th: false,
-    fr: false,
-    sa: false,
-    su: false,
-  };
-  const color = {
-    green: false,
-    black: true,
-    violet: false,
+const BoardTasksForm = ({ setIsEdit, task }) => {
+  const colors = {
+    black: false,
+    yellow: false,
     blue: false,
-    orange: false,
+    green: false,
+    pink: false,
   };
+  const handleSave = (event) => {
+    event.preventDefault();
+    setIsEdit(false);
+  };
+  const { id, color, description, repeating_days: repeatDays } = task;
 
   return (
-    <article class="card card--edit card--yellow card--repeat">
+    <article class={`card card--edit card--${color} card--repeat`}>
       <form class="card__form" method="get">
         <div class="card__inner">
           <div class="card__color-bar">
@@ -35,8 +32,7 @@ const BoardTasksForm = () => {
                 placeholder="Start typing your text here..."
                 name="text"
               >
-                This is example of task edit. You can set date and chose
-                repeating days and color.
+                {description}
               </textarea>
             </label>
           </div>
@@ -77,72 +73,15 @@ const BoardTasksForm = () => {
             <div class="card__colors-inner">
               <h3 class="card__colors-title">Color</h3>
               <div class="card__colors-wrap">
-                <input
-                  type="radio"
-                  id="color-black-4"
-                  class="card__color-input card__color-input--black visually-hidden"
-                  name="color"
-                  value="black"
-                />
-                <label
-                  for="color-black-4"
-                  class="card__color card__color--black"
-                >
-                  black
-                </label>
-                <input
-                  type="radio"
-                  id="color-yellow-4"
-                  class="card__color-input card__color-input--yellow visually-hidden"
-                  name="color"
-                  value="yellow"
-                  checked
-                />
-                <label
-                  for="color-yellow-4"
-                  class="card__color card__color--yellow"
-                >
-                  yellow
-                </label>
-                <input
-                  type="radio"
-                  id="color-blue-4"
-                  class="card__color-input card__color-input--blue visually-hidden"
-                  name="color"
-                  value="blue"
-                />
-                <label for="color-blue-4" class="card__color card__color--blue">
-                  blue
-                </label>
-                <input
-                  type="radio"
-                  id="color-green-4"
-                  class="card__color-input card__color-input--green visually-hidden"
-                  name="color"
-                  value="green"
-                />
-                <label
-                  for="color-green-4"
-                  class="card__color card__color--green"
-                >
-                  green
-                </label>
-                <input
-                  type="radio"
-                  id="color-pink-4"
-                  class="card__color-input card__color-input--pink visually-hidden"
-                  name="color"
-                  value="pink"
-                />
-                <label for="color-pink-4" class="card__color card__color--pink">
-                  pink
-                </label>
+                {Object.entries(colors).map(([color, checked]) => (
+                  <BoardTasksColor color={color} checked={checked} />
+                ))}
               </div>
             </div>
           </div>
 
           <div class="card__status-btns">
-            <button class="card__save" type="submit">
+            <button onClick={handleSave} class="card__save" type="submit">
               save
             </button>
             <button class="card__delete" type="button">

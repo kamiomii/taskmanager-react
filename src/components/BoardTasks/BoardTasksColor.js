@@ -1,4 +1,22 @@
-const BoardTasksColor = () => {
-  return <p></p>;
+const BoardTasksColor = ({ color }) => {
+  const id = crypto.randomUUID();
+
+  return (
+    <>
+      <input
+        type="radio"
+        id={`color-${color}-${id}`}
+        class={`card__color-input card__color-input--${color} visually-hidden`}
+        name="color"
+        value={color}
+      />
+      <label
+        for={`color-${color}-${id}`}
+        class={`card__color card__color--${color}`}
+      >
+        {color}
+      </label>
+    </>
+  );
 };
 export default BoardTasksColor;
