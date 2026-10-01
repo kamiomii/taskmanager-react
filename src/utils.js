@@ -69,5 +69,22 @@ const filters = [
     count: 10,
   },
 ];
+const DEFAULT_TASK = {
+  id: null,
+  color: "green",
+  description: "new task",
+  due_date: new Date().toISOString(),
+  is_archived: false,
+  is_favorite: false,
+  repeating_days: {
+    mo: false,
+    tu: false,
+    we: false,
+    th: true,
+    fr: false,
+    sa: false,
+    su: false,
+  },
+};
 
-export { filterCallBacks, sortedCallBacks, filters };
+export { filterCallBacks, sortedCallBacks, filters, DEFAULT_TASK };
