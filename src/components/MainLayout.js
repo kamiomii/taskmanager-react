@@ -1,26 +1,30 @@
-import useSwR from "swr";
-import SortList from "./SortList/SortList";
-import BoardTasks from "./BoardTasks/BoardTasks";
-import MainFilter from "./MainFilter/MainFilter";
-import LoadMore from "./LoadMore";
-import MainControl from "./MainControl";
-import SvgSprite from "./SvgSprite";
-import { useState } from "react";
-import { filterCallbacks } from "../utils";
+import useSWR from 'swr';
+import SortList from './SortList/SortList';
+import BoardTasks from './BoardTasks/BoardTasks';
+import LoadMore from './LoadMore';
+import MainFilter from './MainFilter/MainFilter';
+import MainControl from './MainControl';
+import SvgSprite from './SvgSprite';
+import { useState } from 'react';
+import { filterCallBacks, sortedCallBacks } from '../utils';
 
 function MainLayout() {
-  const { data, error } = useSwR("/tasks");
-  const [filterType, setFilterType] = useState("all");
+  const { data, error } = useSWR('/tasks');
+  const [filterType, setFilterType] = useState('all');
+  const [sortType, setSortType] = useState(
+    'SORT BY DEFAULT',
+  );
 
   if (error) {
-    return <div>ошибка доступа или сети</div>;
+    return <div>Ошибка доступа или сети</div>;
   }
-
   if (!data) {
-    return <div>загрузка...</div>;
+    return <div>Загрузка...</div>;
   }
 
-  const tasks = [...data].filter(filterCallbacks[filterType]);
+  const tasks = [...data]
+    .filter(filterCallBacks[filterType])
+    .sort(sortedCallBacks[sortType]);
 
   return (
     <>
@@ -28,7 +32,6 @@ function MainLayout() {
 
       <main class="main">
         <MainControl />
-
         <MainFilter
           data={data}
           filterType={filterType}
@@ -36,10 +39,8 @@ function MainLayout() {
         />
 
         <section class="board container">
-          <SortList />
-
+          <SortList setSortType={setSortType} />
           <BoardTasks tasks={tasks} />
-
           <LoadMore />
         </section>
       </main>

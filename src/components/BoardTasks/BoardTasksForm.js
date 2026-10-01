@@ -1,19 +1,20 @@
 import BoardTasksColor from "./BoardTasksColor";
 import BoardTasksRepeatDay from "./BoardTasksRepeatDay";
-
+import useSwR from "swr";
+const colors = {
+  black: false,
+  yellow: false,
+  blue: false,
+  green: false,
+  pink: false,
+};
 const BoardTasksForm = ({ setIsEdit, task }) => {
-  const colors = {
-    black: false,
-    yellow: false,
-    blue: false,
-    green: false,
-    pink: false,
-  };
   const handleSave = (event) => {
     event.preventDefault();
     setIsEdit(false);
   };
   const { id, color, description, repeating_days: repeatDays } = task;
+  const { data, error } = useSwR("/tasks");
 
   return (
     <article class={`card card--edit card--${color} card--repeat`}>

@@ -1,16 +1,21 @@
-import { useState } from "react";
-import BoardTasksForm from "./BoardTasksForm";
+import { useState } from 'react';
+import BoardTasksForm from './BoardTasksForm/BoardTasksForm';
 
-function BoardTasksItem({ task }) {
+const BoardTasksItem = ({ task }) => {
   const { id, color, description } = task;
 
   const [isEdit, setIsEdit] = useState(false);
+
   const handleEdit = () => {
     setIsEdit(true);
   };
+
   if (isEdit) {
-    return <BoardTasksForm task={task} setIsEdit={setIsEdit} />;
+    return (
+      <BoardTasksForm task={task} setIsEdit={setIsEdit} />
+    );
   }
+
   return (
     <article key={id} class={`card card--${color}`}>
       <div class="card__form">
@@ -23,16 +28,26 @@ function BoardTasksItem({ task }) {
             >
               edit
             </button>
-            <button type="button" class="card__btn card__btn--archive">
+            <button
+              type="button"
+              class="card__btn card__btn--archive"
+            >
               archive
             </button>
-            <button type="button" class="card__btn card__btn--favorites">
+            <button
+              type="button"
+              class="card__btn card__btn--favorites"
+            >
               favorites
             </button>
           </div>
 
           <div class="card__color-bar">
-            <svg class="card__color-bar-wave" width="100%" height="10">
+            <svg
+              class="card__color-bar-wave"
+              width="100%"
+              height="10"
+            >
               <use xlinkHref="#wave"></use>
             </svg>
           </div>
@@ -46,7 +61,9 @@ function BoardTasksItem({ task }) {
               <div class="card__dates">
                 <div class="card__date-deadline">
                   <p class="card__input-deadline-wrap">
-                    <span class="card__date">23 September</span>
+                    <span class="card__date">
+                      23 September
+                    </span>
                   </p>
                 </div>
               </div>
@@ -56,5 +73,6 @@ function BoardTasksItem({ task }) {
       </div>
     </article>
   );
-}
+};
+
 export default BoardTasksItem;

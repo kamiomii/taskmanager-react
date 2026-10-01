@@ -16,4 +16,5 @@ function SvgSprite() {
     </div>
   );
 }
+
 export default SvgSprite;

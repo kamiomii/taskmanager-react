@@ -6,4 +6,5 @@ function MainControl() {
     </section>
   );
 }
+
 export default MainControl;

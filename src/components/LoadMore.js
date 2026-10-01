@@ -5,4 +5,5 @@ function LoadMore() {
     </button>
   );
 }
+
 export default LoadMore;

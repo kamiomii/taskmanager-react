@@ -1,5 +1,6 @@
 function MainFilterItem(props) {
   const { filterType, disabled, checked, count, onChange } = props;
+
   return (
     <>
       <input
@@ -7,8 +8,8 @@ function MainFilterItem(props) {
         id={`filter__${filterType}`}
         class="filter__input visually-hidden"
         name="filter"
-        {...(checked && { checked: "checked" })}
         {...(disabled && { disabled: "disabled" })}
+        {...(checked && { checked: "checked" })}
         onChange={() => {
           onChange(filterType);
         }}
